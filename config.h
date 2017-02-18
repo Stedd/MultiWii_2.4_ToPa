@@ -91,7 +91,7 @@
          please submit any correction to this list.
            Note from Alex: I only own some boards, for other boards, I'm not sure, the info was gathered via rc forums, be cautious */
       //#define FFIMUv1         // first 9DOF+baro board from Jussi, with HMC5843                   <- confirmed by Alex
-      #define FFIMUv2         // second version of 9DOF+baro board from Jussi, with HMC5883       <- confirmed by Alex
+      //#define FFIMUv2         // second version of 9DOF+baro board from Jussi, with HMC5883       <- confirmed by Alex
       //#define FREEIMUv1       // v0.1 & v0.2 & v0.3 version of 9DOF board from Fabio
       //#define FREEIMUv03      // FreeIMU v0.3 and v0.3.1
       //#define FREEIMUv035     // FreeIMU v0.3.5 no baro
@@ -150,7 +150,7 @@
       //#define MEGAWAP_V2_STD     // available here: http://www.multircshop.com                    <- confirmed by Alex
       //#define MEGAWAP_V2_ADV
       //#define HK_MultiWii_SE_V2  // Hobbyking board with MPU6050 + HMC5883L + BMP085
-      //#define HK_MultiWii_328P   // Also labeled "Hobbybro" on the back.  ITG3205 + BMA180 + BMP085 + NMC5583L + DSM2 Connector (Spektrum Satellite)  
+      #define HK_MultiWii_328P   // Also labeled "Hobbybro" on the back.  ITG3205 + BMA180 + BMP085 + NMC5583L + DSM2 Connector (Spektrum Satellite)  
       //#define RCNet_FC           // RCNet FC with MPU6050 and MS561101BA  http://www.rcnet.com
       //#define RCNet_FC_GPS       // RCNet FC with MPU6050 + MS561101BA + HMC5883L + UBLOX GPS http://www.rcnet.com
       //#define FLYDU_ULTRA        // MEGA+10DOF+MT3339 FC
@@ -669,7 +669,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
                                    // note: Now a GPS can share MSP on the same port. The only constrain is to not use it simultaneously, and use the same port speed.
 
     // avoid using 115200 baud because with 16MHz arduino the 115200 baudrate have more than 2% speed error (57600 have 0.8% error)
-    #define GPS_BAUD    115200      // GPS_BAUD will override SERIALx_COM_SPEED for the selected port
+    #define GPS_BAUD    57600      // GPS_BAUD will override SERIALx_COM_SPEED for the selected port
 
    /* GPS protocol 
        NMEA  - Standard NMEA protocol GGA, GSA and RMC  sentences are needed
@@ -678,11 +678,11 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
        With UBLOX and MTK_BINARY you don't have to use GPS_FILTERING in multiwii code !!! */
 
     
-    #define NMEA
-    //#define UBLOX
+    //#define NMEA
+    #define UBLOX
     //#define MTK_BINARY16
     //#define MTK_BINARY19
-    #define INIT_MTK_GPS        // initialize MTK GPS for using selected speed, 5Hz update rate and GGA & RMC sentence or binary settings
+    //#define INIT_MTK_GPS        // initialize MTK GPS for using selected speed, 5Hz update rate and GGA & RMC sentence or binary settings
 
 
     /* I2C GPS device made with an independant arduino + GPS device
@@ -721,7 +721,7 @@ At this moment you can use this function only with WinGUI 2.3 release. MultiWiiC
 Convert the degree+minutes into decimal degree by ==> degree+minutes*(1/60)
 Note the sign on declination it could be negative or positive (WEST or EAST)
 Also note, that maqgnetic declination changes with time, so recheck your value every 3-6 months */
-#define MAG_DECLINATION  0.883f   //(**)
+#define MAG_DECLINATION  1.9333f   //(**)
 
 // Adds a forward predictive filterig to compensate gps lag. Code based on Jason Short's lead filter implementation
 #define GPS_LEAD_FILTER               //(**)
@@ -749,7 +749,8 @@ Also note, that maqgnetic declination changes with time, so recheck your value e
 // Weight factor of the crosstrack error in navigation calculations (do not touch)
 #define CROSSTRACK_GAIN            .4     //(**)
 // Maximum allowable banking than navigation outputs
-#define NAV_BANK_MAX 3000                 //(**)
+//#define NAV_BANK_MAX 3000                 //(**)
+#define NAV_BANK_MAX 1000                 //(**)
 
 //Defines the RTH altitude. 0 means keep current alt during RTH (in meters)
 #define RTH_ALTITUDE               15        //(**)
